@@ -1,0 +1,34 @@
+/* 	CSS for aviation-safety.net 	*/
+/* 	(c) Harro Ranter		*/
+/* 	print		*/
+
+
+.navigation { 
+	display: none; 
+}
+
+.navigation ul, .navigation ul li {
+		display: none; 
+}
+
+.navigation ul li a:link, .navigation ul li a:visited {
+	display: none; 
+	}
+	
+.navigation ul li a:hover {
+	display: none; 
+	}
+	
+.navigation{
+ 	display: none; 
+	}
+
+#left-sidebar { 
+	display: none; 
+}
+
+.trail {
+	display: none; 
+	}
+	
+	

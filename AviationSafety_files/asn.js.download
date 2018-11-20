@@ -1,0 +1,10 @@
+//Toggle Display Function
+function toggleDisplay(id) {
+  if (document.getElementById) {
+    var e = document.getElementById(id);
+    if (e) {
+      if (e.style.display !== "") e.style.display = ""
+      else e.style.display = "none"
+    }  
+  }
+}

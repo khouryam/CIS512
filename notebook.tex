@@ -1,0 +1,743 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Buffalo\_crime\_school\_dataprojectcole}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Buffalo Open Data}\label{buffalo-open-data}
+
+\subsection{The connection between the crime rate in Buffalo public
+school to their graduation
+rate.}\label{the-connection-between-the-crime-rate-in-buffalo-public-school-to-their-graduation-rate.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    First data source. Buffalo Open Data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Crime\PYZus{}Incidents.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZIP CODE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Andrea\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}IPython\textbackslash{}core\textbackslash{}interactiveshell.py:2785: DtypeWarning: Columns (10,11) have mixed types. Specify dtype option on import or set low\_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}    incident\_id case\_number       incident\_datetime incident\_type\_primary  \textbackslash{}
+         0    834517439  18-0490226  02/18/2018 08:40:00 AM         LARCENY/THEFT   
+         1    834605904  18-0490729  02/18/2018 08:42:33 AM                   UUV   
+         2    834508063  18-0490262  02/18/2018 10:10:00 AM         LARCENY/THEFT   
+         3    834601267  18-0490846  02/18/2018 11:20:00 AM               ROBBERY   
+         4    834512110  18-0490444  02/18/2018 12:00:00 PM         LARCENY/THEFT   
+         
+                                         incident\_description  clearance\_type  \textbackslash{}
+         0  Buffalo Police are investigating this report o{\ldots}             NaN   
+         1  Buffalo Police are investigating this report o{\ldots}             NaN   
+         2  Buffalo Police are investigating this report o{\ldots}             NaN   
+         3  Buffalo Police are investigating this report o{\ldots}             NaN   
+         4  Buffalo Police are investigating this report o{\ldots}             NaN   
+         
+                            address\_1  address\_2     city state   {\ldots}    \textbackslash{}
+         0         400 Block GRANT ST        NaN  BUFFALO    NY   {\ldots}     
+         1  200 Block BRECKENRIDGE ST        NaN  BUFFALO    NY   {\ldots}     
+         2      1100 Block ELMWOOD AV        NaN  BUFFALO    NY   {\ldots}     
+         3           600 Block ELM ST        NaN  BUFFALO    NY   {\ldots}     
+         4         100 Block ALLEN ST        NaN  BUFFALO    NY   {\ldots}     
+         
+                                                 location hour\_of\_day  day\_of\_week  \textbackslash{}
+         0   POINT (-78.88992082398013 42.92747023459293)           8       Sunday   
+         1    POINT (-78.8933407033567 42.91697944628836)           8       Sunday   
+         2  POINT (-78.87681855468679 42.928217979853734)          10       Sunday   
+         3          POINT (-78.86476379999999 42.8986674)          11       Sunday   
+         4   POINT (-78.87698161925755 42.89965384438641)          12       Sunday   
+         
+            parent\_incident\_type Council Districts Police Districts Zip Codes  Tracts  \textbackslash{}
+         0                 Theft               1.0              5.0       2.0    27.0   
+         1      Theft of Vehicle               3.0              5.0       2.0    43.0   
+         2                 Theft               7.0              5.0      12.0    54.0   
+         3               Robbery               4.0              1.0      14.0    35.0   
+         4                 Theft               5.0              1.0      15.0    13.0   
+         
+           Block Groups  Blocks  
+         0        176.0   636.0  
+         1        110.0  2829.0  
+         2        193.0  2471.0  
+         3        153.0  2667.0  
+         4        141.0  1838.0  
+         
+         [5 rows x 26 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} Index(['incident\_id', 'case\_number', 'incident\_datetime',
+                'incident\_type\_primary', 'incident\_description', 'clearance\_type',
+                'address\_1', 'address\_2', 'city', 'state', 'zip code', 'country',
+                'latitude', 'longitude', 'created\_at', 'updated\_at', 'location',
+                'hour\_of\_day', 'day\_of\_week', 'parent\_incident\_type',
+                'Council Districts', 'Police Districts', 'Zip Codes', 'Tracts',
+                'Block Groups', 'Blocks'],
+               dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{incident\PYZus{}description}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0         Buffalo Police are investigating this report o{\ldots}
+        1         Buffalo Police are investigating this report o{\ldots}
+        2         Buffalo Police are investigating this report o{\ldots}
+        3         Buffalo Police are investigating this report o{\ldots}
+        4         Buffalo Police are investigating this report o{\ldots}
+        5                                                       UUV
+        6                                             LARCENY/THEFT
+        7                                                  BURGLARY
+        8                                                      RAPE
+        9                                                      RAPE
+        10                                            LARCENY/THEFT
+        11                                            LARCENY/THEFT
+        12                                            LARCENY/THEFT
+        13        Buffalo Police are investigating this report o{\ldots}
+        14        Buffalo Police are investigating this report o{\ldots}
+        15        Buffalo Police are investigating this report o{\ldots}
+        16        Buffalo Police are investigating this report o{\ldots}
+        17        Buffalo Police are investigating this report o{\ldots}
+        18        Buffalo Police are investigating this report o{\ldots}
+        19        Buffalo Police are investigating this report o{\ldots}
+        20        Buffalo Police are investigating this report o{\ldots}
+        21        Buffalo Police are investigating this report o{\ldots}
+        22        Buffalo Police are investigating this report o{\ldots}
+        23        Buffalo Police are investigating this report o{\ldots}
+        24        Buffalo Police are investigating this report o{\ldots}
+        25        Buffalo Police are investigating this report o{\ldots}
+        26        Buffalo Police are investigating this report o{\ldots}
+        27        Buffalo Police are investigating this report o{\ldots}
+        28        Buffalo Police are investigating this report o{\ldots}
+        29        Buffalo Police are investigating this report o{\ldots}
+                                        {\ldots}                        
+        170927    Buffalo Police are investigating this report o{\ldots}
+        170928    Buffalo Police are investigating this report o{\ldots}
+        170929    Buffalo Police are investigating this report o{\ldots}
+        170930    Buffalo Police are investigating this report o{\ldots}
+        170931    Buffalo Police are investigating this report o{\ldots}
+        170932    Buffalo Police are investigating this report o{\ldots}
+        170933    Buffalo Police are investigating this report o{\ldots}
+        170934    Buffalo Police are investigating this report o{\ldots}
+        170935    Buffalo Police are investigating this report o{\ldots}
+        170936    Buffalo Police are investigating this report o{\ldots}
+        170937    Buffalo Police are investigating this report o{\ldots}
+        170938    Buffalo Police are investigating this report o{\ldots}
+        170939    Buffalo Police are investigating this report o{\ldots}
+        170940    Buffalo Police are investigating this report o{\ldots}
+        170941    Buffalo Police are investigating this report o{\ldots}
+        170942    Buffalo Police are investigating this report o{\ldots}
+        170943    Buffalo Police are investigating this report o{\ldots}
+        170944    Buffalo Police are investigating this report o{\ldots}
+        170945    Buffalo Police are investigating this report o{\ldots}
+        170946    Buffalo Police are investigating this report o{\ldots}
+        170947    Buffalo Police are investigating this report o{\ldots}
+        170948    Buffalo Police are investigating this report o{\ldots}
+        170949    Buffalo Police are investigating this report o{\ldots}
+        170950    Buffalo Police are investigating this report o{\ldots}
+        170951    Buffalo Police are investigating this report o{\ldots}
+        170952    Buffalo Police are investigating this report o{\ldots}
+        170953    Buffalo Police are investigating this report o{\ldots}
+        170954    Buffalo Police are investigating this report o{\ldots}
+        170955    Buffalo Police are investigating this report o{\ldots}
+        170956    Buffalo Police are investigating this report o{\ldots}
+        Name: incident\_description, Length: 170957, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{zip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} How many crimes were commited in each area code}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 14215.0       305
+         14207.0       287
+         14202.0       271
+         14216.0       265
+         14215         224
+         14213.0       214
+         14211.0       198
+         14207         164
+         14203.0       159
+         14216         158
+         14202         156
+         14201.0       154
+         14212.0       128
+         14213         127
+         14204.0       102
+         14211          99
+         14206.0        98
+         14220.0        93
+         14203          93
+         14201          91
+         14210.0        86
+         14208.0        82
+         14214.0        80
+         14206          79
+         14212          75
+         14209.0        74
+         14222.0        71
+         14210          68
+         14214          65
+         14220          58
+                      {\ldots} 
+         14217.0         4
+         11233           3
+         14217           3
+         14223           3
+         14228.0         3
+         14225           3
+         14260-1800      2
+         14228           2
+         10306           2
+         14227.0         2
+         14219.0         2
+         14224           2
+         14221.0         2
+         11213           1
+         14150           1
+         14070           1
+         14225.0         1
+         14701.0         1
+         14221           1
+         14223-2317      1
+         14624.0         1
+         14424           1
+         14240           1
+         14150.0         1
+         14260.0         1
+         14227           1
+         14569.0         1
+         14611.0         1
+         14260           1
+         14760           1
+         Name: zip, Length: 71, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{data2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Buffalo\PYZus{}Public\PYZus{}Schools.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}                                          SCHOOL NAME     ID ALT ID  \textbackslash{}
+         0                     DYOUVILLE PORTER CAMPUS SCHOOL  PS003    PS3   
+         1            BUFFALO ELEMENTARY SCHOOL OF TECHNOLOGY  PS006    PS6   
+         2                             EARLY CHILDHOOD CENTER  PS017   PS17   
+         3  DR ANTONIA PANTOJA COMMUNITY SCHOOL OF EXCELLENCE  PS018   PS18   
+         4                      NATIVE AMERICAN MAGNET SCHOOL  PS019   PS19   
+         
+                  TYPE GRADE MIN  GRADE MAX GRADE LEVEL              START TIME  \textbackslash{}
+         0  ELEMENTARY        PK          8        PK-8  03/01/2018 09:00:00 AM   
+         1  ELEMENTARY        PK          8        PK-8  03/01/2018 08:00:00 AM   
+         2  ELEMENTARY        PK          4        PK-4  03/01/2018 09:00:00 AM   
+         3  ELEMENTARY        PK          8        PK-8  03/01/2018 09:00:00 AM   
+         4  ELEMENTARY        PK          8        PK-8  03/01/2018 08:00:00 AM   
+         
+                          END TIME  ADDRESS NUMBER             STREET     CITY STATE  \textbackslash{}
+         0  03/01/2018 03:55:00 PM             255         PORTER AVE  BUFFALO    NY   
+         1  03/01/2018 02:55:00 PM             414  SOUTH DIVISION ST  BUFFALO    NY   
+         2  03/01/2018 03:55:00 PM            1045      W DELEVAN AVE  BUFFALO    NY   
+         3  03/01/2018 03:55:00 PM             750           WEST AVE  BUFFALO    NY   
+         4  03/01/2018 02:55:00 PM              97      W DELAVAN AVE  BUFFALO    NY   
+         
+            ZIP CODE       PHONE           FAX  LATITUDE  LONGITUDE  \textbackslash{}
+         0     14201  7168163120  7.168887e+09   42.9009   -78.8923   
+         1     14204  7168263767  7.168514e+09   42.8807   -78.8610   
+         2     14209  7168163150  7.168887e+09   42.9218   -78.8602   
+         3     14215  7168163160  7.168887e+09   42.9110   -78.8969   
+         4     14213  7168163180  7.168887e+09   42.9214   -78.8958   
+         
+                       LOCATION  
+         0  (42.9009, -78.8923)  
+         1   (42.8807, -78.861)  
+         2  (42.9218, -78.8602)  
+         3   (42.911, -78.8969)  
+         4  (42.9214, -78.8958)  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{data2}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Index(['SCHOOL NAME', 'ID', 'ALT ID', 'TYPE', 'GRADE MIN', 'GRADE MAX',
+               'GRADE LEVEL', 'START TIME', 'END TIME', 'ADDRESS NUMBER', 'STREET',
+               'CITY', 'STATE', 'ZIP CODE', 'PHONE', 'FAX', 'LATITUDE', 'LONGITUDE',
+               'LOCATION'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SCHOOL NAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 63
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 65
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ZIP CODE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} How many schools there are in each zip code}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 14215    8
+         14211    8
+         14213    7
+         14207    6
+         14204    6
+         14214    6
+         14201    4
+         14220    4
+         14216    3
+         14210    3
+         14208    3
+         14206    2
+         14202    2
+         14209    2
+         14212    1
+         Name: ZIP CODE, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GRADE LEVEL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 0      PK-8
+         1      PK-8
+         2      PK-4
+         3      PK-8
+         4      PK-8
+         5      PK-8
+         6      PK-8
+         7      PK-8
+         8      PK-8
+         9      PK-8
+         10     PK-8
+         11     K-12
+         12     PK-8
+         13     PK-8
+         14     PK-8
+         15     PK-8
+         16     PK-4
+         17     PK-2
+         18      3-8
+         19     PK-4
+         20     PK-4
+         21     PK-4
+         22      5-8
+         23     PK-8
+         24     PK-8
+         25     PK-8
+         26     PK-8
+         27     PK-8
+         28     PK-8
+         29     PK-8
+               {\ldots}  
+         35     PK-8
+         36     PK-8
+         37     PK-8
+         38     PK-8
+         39     PK-4
+         40     9-12
+         41      7-8
+         42     5-12
+         43     5-12
+         44     5-12
+         45      5-8
+         46     9-12
+         47     6-12
+         48     6-12
+         49    11-12
+         50     9-12
+         51     9-12
+         52     9-12
+         53     9-12
+         54     9-12
+         55     9-12
+         56     9-12
+         57     9-12
+         58       12
+         59     9-12
+         60     8-12
+         61     9-10
+         62     9-12
+         63     9-10
+         64     9-12
+         Name: GRADE LEVEL, Length: 65, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{alldata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{data2}\PY{p}{,} \PY{n}{on} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ZIP CODE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{alldata}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-34-3eb9273d33f8> in <module>()
+    ----> 1 alldata = pd.merge(data,data2, on ="ZIP CODE")
+          2 alldata.head()
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}reshape\textbackslash{}merge.py in merge(left, right, how, on, left\_on, right\_on, left\_index, right\_index, sort, suffixes, copy, indicator, validate)
+         58                          right\_index=right\_index, sort=sort, suffixes=suffixes,
+         59                          copy=copy, indicator=indicator,
+    ---> 60                          validate=validate)
+         61     return op.get\_result()
+         62 
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}reshape\textbackslash{}merge.py in \_\_init\_\_(self, left, right, how, on, left\_on, right\_on, axis, left\_index, right\_index, sort, suffixes, copy, indicator, validate)
+        552         \# validate the merge keys dtypes. We may need to coerce
+        553         \# to avoid incompat dtypes
+    --> 554         self.\_maybe\_coerce\_merge\_keys()
+        555 
+        556         \# If argument passed to validate,
+    
+
+        \textasciitilde{}\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}core\textbackslash{}reshape\textbackslash{}merge.py in \_maybe\_coerce\_merge\_keys(self)
+        978                 raise ValueError(msg)
+        979             elif not is\_numeric\_dtype(lk) and is\_numeric\_dtype(rk):
+    --> 980                 raise ValueError(msg)
+        981             elif is\_datetimelike(lk) and not is\_datetimelike(rk):
+        982                 raise ValueError(msg)
+    
+
+        ValueError: You are trying to merge on object and int64 columns. If you wish to proceed you should use pd.concat
+
+    \end{Verbatim}
+
+    Third data source
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{data3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{data3}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
